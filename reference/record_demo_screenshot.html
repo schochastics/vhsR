@@ -52,18 +52,8 @@ PNG frame using vhs's <code>Screenshot</code> directive.</p>
 <span>  <span class="va">expr</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">"demo.png"</span>,</span>
 <span>  at <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  width <span class="op">=</span> <span class="fl">1200</span>,</span>
-<span>  height <span class="op">=</span> <span class="fl">600</span>,</span>
-<span>  font_size <span class="op">=</span> <span class="fl">22</span>,</span>
-<span>  theme <span class="op">=</span> <span class="st">"Catppuccin Mocha"</span>,</span>
-<span>  typing_speed <span class="op">=</span> <span class="st">"60ms"</span>,</span>
-<span>  playback_speed <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  line_pause <span class="op">=</span> <span class="st">"500ms"</span>,</span>
+<span>  <span class="va">...</span>,</span>
 <span>  backend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"arf"</span>, <span class="st">"radian"</span>, <span class="st">"R"</span><span class="op">)</span>,</span>
-<span>  start_pause <span class="op">=</span> <span class="st">"800ms"</span>,</span>
-<span>  end_pause <span class="op">=</span> <span class="st">"500ms"</span>,</span>
-<span>  paragraph_pause <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  typing_speed_jitter <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -86,28 +76,11 @@ last typed line. A string <code>"after:N"</code> (1-indexed) → after the Nth
 line.</p></dd>
 
 
-<dt id="arg-width-height">width, height<a class="anchor" aria-label="anchor" href="#arg-width-height"></a></dt>
-<dd><p>Terminal dimensions in pixels.</p></dd>
-
-
-<dt id="arg-font-size">font_size<a class="anchor" aria-label="anchor" href="#arg-font-size"></a></dt>
-<dd><p>Font size in pixels.</p></dd>
-
-
-<dt id="arg-theme">theme<a class="anchor" aria-label="anchor" href="#arg-theme"></a></dt>
-<dd><p>A vhs theme name (see vhs docs for the full list).</p></dd>
-
-
-<dt id="arg-typing-speed">typing_speed<a class="anchor" aria-label="anchor" href="#arg-typing-speed"></a></dt>
-<dd><p>Per-keystroke delay, e.g. <code>"60ms"</code>.</p></dd>
-
-
-<dt id="arg-playback-speed">playback_speed<a class="anchor" aria-label="anchor" href="#arg-playback-speed"></a></dt>
-<dd><p>Playback rate multiplier (1 = real time).</p></dd>
-
-
-<dt id="arg-line-pause">line_pause<a class="anchor" aria-label="anchor" href="#arg-line-pause"></a></dt>
-<dd><p>Delay after each line of R code, e.g. <code>"500ms"</code>.</p></dd>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Pacing and styling arguments forwarded to <code><a href="tape_options.html">tape_options()</a></code>.
+Pass any of <code>width</code>, <code>height</code>, <code>font_size</code>, <code>theme</code>, <code>typing_speed</code>,
+<code>playback_speed</code>, <code>line_pause</code>, <code>start_pause</code>, <code>end_pause</code>,
+<code>paragraph_pause</code>, <code>typing_speed_jitter</code> by name. Unknown names error.</p></dd>
 
 
 <dt id="arg-backend">backend<a class="anchor" aria-label="anchor" href="#arg-backend"></a></dt>
@@ -116,28 +89,6 @@ line.</p></dd>
 console with tree-sitter syntax highlighting and zero runtime
 dependencies — see <a href="https://github.com/eitsupi/arf" class="external-link">https://github.com/eitsupi/arf</a>), falls back to
 <code>"radian"</code> if found, otherwise plain <code>"R"</code>.</p></dd>
-
-
-<dt id="arg-start-pause">start_pause<a class="anchor" aria-label="anchor" href="#arg-start-pause"></a></dt>
-<dd><p>Delay between R startup and the first typed line
-(e.g. <code>"800ms"</code>).</p></dd>
-
-
-<dt id="arg-end-pause">end_pause<a class="anchor" aria-label="anchor" href="#arg-end-pause"></a></dt>
-<dd><p>Delay between the last typed line and the (hidden)
-<code><a href="https://rdrr.io/r/base/quit.html" class="external-link">q()</a></code> exit (e.g. <code>"500ms"</code>).</p></dd>
-
-
-<dt id="arg-paragraph-pause">paragraph_pause<a class="anchor" aria-label="anchor" href="#arg-paragraph-pause"></a></dt>
-<dd><p>If set, blank lines in <code>expr</code> produce a sleep
-of this duration instead of being typed.</p></dd>
-
-
-<dt id="arg-typing-speed-jitter">typing_speed_jitter<a class="anchor" aria-label="anchor" href="#arg-typing-speed-jitter"></a></dt>
-<dd><p>Numeric in <code>[0, 1]</code>; when positive, each
-typed line uses a speed sampled uniformly within <code>±jitter</code> of
-<code>typing_speed</code>. Set <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">base::set.seed()</a></code> before calling for
-reproducible jitter.</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>
