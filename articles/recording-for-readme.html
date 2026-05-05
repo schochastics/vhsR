@@ -107,11 +107,32 @@ the chunk:</p>
 <li>emits a markdown image-include in the rendered
 <code>README.md</code>.</li>
 </ol>
-<p>Forwarded chunk options match the <code><a href="../reference/record_demo.html">record_demo()</a></code> arg
-names: <code>output</code>, <code>width</code>, <code>height</code>,
-<code>font_size</code>, <code>theme</code>, <code>typing_speed</code>,
-<code>playback_speed</code>, <code>line_pause</code>,
-<code>backend</code>. Anything else is ignored.</p>
+<p>Forwarded chunk options are <code>output</code>,
+<code>backend</code>, and any pacing or styling argument accepted by
+<code><a href="../reference/tape_options.html">tape_options()</a></code> (e.g. <code>width</code>,
+<code>height</code>, <code>font_size</code>, <code>theme</code>,
+<code>typing_speed</code>, <code>line_pause</code>,
+<code>start_pause</code>, <code>paragraph_pause</code>). See
+<code><a href="../reference/tape_options.html">?tape_options</a></code> for the full list. Anything else is
+ignored.</p>
+</div>
+<div class="section level2">
+<h2 id="pipe-chains-type-the-way-you-wrote-them">Pipe chains type the way you wrote them<a class="anchor" aria-label="anchor" href="#pipe-chains-type-the-way-you-wrote-them"></a>
+</h2>
+<p>Multi-line <code>|&gt;</code> pipelines record verbatim — the
+recording shows the pipe form you typed, not the desugared nested-call
+form R’s parser produces internally:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/record_demo.html">record_demo</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">mtcars</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">6</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span>, output <span class="op">=</span> <span class="st">"man/figures/demo.gif"</span><span class="op">)</span></span></code></pre></div>
+<p>Same goes for blank lines: an empty line between two statements stays
+empty in the recording, which composes nicely with
+<code>paragraph_pause</code> when you want a beat between sections.</p>
 </div>
 <div class="section level2">
 <h2 id="where-the-gif-lives-and-what-to-commit">Where the GIF lives, and what to commit<a class="anchor" aria-label="anchor" href="#where-the-gif-lives-and-what-to-commit"></a>
@@ -152,11 +173,11 @@ of frames.</li>
 </ul>
 <p>If the GIF is still too big, switch to <code>.mp4</code> or
 <code>.webm</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/record_demo.html">record_demo</a></span><span class="op">(</span><span class="op">{</span><span class="va">...</span><span class="op">}</span>, output <span class="op">=</span> <span class="st">"man/figures/demo.mp4"</span><span class="op">)</span></span></code></pre></div>
 <p>GitHub’s README renderer doesn’t autoplay video, but pkgdown and any
 HTML render do. Embed it with <code><a href="../reference/vhsr_widget.html">vhsr_widget()</a></code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/vhsr_widget.html">vhsr_widget</a></span><span class="op">(</span><span class="st">"man/figures/demo.mp4"</span><span class="op">)</span></span></code></pre></div>
 <p>…which produces a
 <code>&lt;video controls loop muted playsinline&gt;</code> tag tree

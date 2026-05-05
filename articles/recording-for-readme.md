@@ -52,11 +52,34 @@ When you run `devtools::build_readme()` (or knit by hand), the chunk:
 1.  records a GIF at `output=`;
 2.  emits a markdown image-include in the rendered `README.md`.
 
-Forwarded chunk options match the
-[`record_demo()`](https://schochastics.github.io/vhsR/reference/record_demo.md)
-arg names: `output`, `width`, `height`, `font_size`, `theme`,
-`typing_speed`, `playback_speed`, `line_pause`, `backend`. Anything else
-is ignored.
+Forwarded chunk options are `output`, `backend`, and any pacing or
+styling argument accepted by
+[`tape_options()`](https://schochastics.github.io/vhsR/reference/tape_options.md)
+(e.g. `width`, `height`, `font_size`, `theme`, `typing_speed`,
+`line_pause`, `start_pause`, `paragraph_pause`). See
+[`?tape_options`](https://schochastics.github.io/vhsR/reference/tape_options.md)
+for the full list. Anything else is ignored.
+
+## Pipe chains type the way you wrote them
+
+Multi-line `|>` pipelines record verbatim — the recording shows the pipe
+form you typed, not the desugared nested-call form R’s parser produces
+internally:
+
+``` r
+
+record_demo({
+  library(dplyr)
+
+  mtcars |>
+    filter(cyl == 6) |>
+    arrange(desc(mpg))
+}, output = "man/figures/demo.gif")
+```
+
+Same goes for blank lines: an empty line between two statements stays
+empty in the recording, which composes nicely with `paragraph_pause`
+when you want a beat between sections.
 
 ## Where the GIF lives, and what to commit
 
