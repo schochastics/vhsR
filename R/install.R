@@ -88,7 +88,7 @@ install_ttyd <- function(cache, version) {
   }
 
   if (os == "windows") {
-    asset <- "ttyd.win10.exe"
+    asset <- "ttyd.win32.exe"
     target <- file.path(cache, "ttyd.exe")
   } else {
     arch_part <- switch(

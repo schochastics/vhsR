@@ -11,7 +11,7 @@ vhsr_os <- function() {
 
 vhsr_arch <- function() {
   m <- tolower(Sys.info()[["machine"]])
-  if (m %in% c("x86_64", "amd64")) {
+  if (m %in% c("x86_64", "x86-64", "amd64")) {
     "x86_64"
   } else if (m %in% c("arm64", "aarch64")) {
     "arm64"
